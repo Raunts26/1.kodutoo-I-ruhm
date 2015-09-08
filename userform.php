@@ -34,7 +34,7 @@
 	
 	$reg_email_error = "";
 	$reg_password_error = "";
-	$reg_password_len_error = "";
+	//$reg_password_len_error = "";
 	$reg_password_repeat_error = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,17 +47,20 @@
 			if (empty($_POST["reg_password"])) {
 				$reg_password_error = "Palun sisesta parool!";
 				
+			} elseif (strlen($_POST["reg_password"]) < 8) {
+			$reg_password_error = $reg_password_error. "Teie parool on alla 8 tähemärgi!";
+				
+				
 			}
 			if (empty($_POST["reg_password_repeat"])) {
 			$reg_password_repeat_error = "Teie parool ei kattunud eelneva parooliga!";
 				
 			}
-			if (strlen($_POST["reg_password"]) < 8) {
-			$reg_password_len_error = "Teie parool on alla 8 tähemärgi!";
-				
-			}
 		}
 	}
+	
+	// LUUA IF KUI PAROOL PUUDU SIIS EI KUVA TAHEMARGI PIKKUST
+	
 	
 ?>
 
@@ -82,7 +85,7 @@
 					<form action="userform.php" method="post">
 						<h2>Registreeru</h2>
 						<input name="reg_email" type="email" placeholder="E-post"> <?php echo $reg_email_error; ?><br><br>
-						<input name="reg_password" type="password" placeholder="Parool"> <?php echo $reg_password_error; echo $reg_password_len_error;?><br><br>
+						<input name="reg_password" type="password" placeholder="Parool"> <?php echo $reg_password_error;?><br><br>
 						<input name="reg_password_repeat" type="password" placeholder="Korda parooli"> <?php echo $reg_password_repeat_error; ?><br><br>
 						
 						<input type="submit" name="btnregister" value="Registreeru">
