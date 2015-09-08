@@ -34,8 +34,8 @@
 	
 	$reg_email_error = "";
 	$reg_password_error = "";
-	//$reg_password_len_error = "";
 	$reg_password_repeat_error = "";
+	$reg_name_error = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["btnregister"])) {
@@ -44,6 +44,11 @@
 				$reg_email_error = "Palun sisesta e-posti aadress!";
 				
 			}	
+			if (empty($_POST["reg_name"])) {
+				$reg_name_error = "Palun sisesta enda nimi!";
+				
+			}
+			
 			if (empty($_POST["reg_password"])) {
 				$reg_password_error = "Palun sisesta parool!";
 				
@@ -58,8 +63,6 @@
 			}
 		}
 	}
-	
-	// LUUA IF KUI PAROOL PUUDU SIIS EI KUVA TAHEMARGI PIKKUST
 	
 	
 ?>
@@ -85,6 +88,7 @@
 					<form action="userform.php" method="post">
 						<h2>Registreeru</h2>
 						<input name="reg_email" type="email" placeholder="E-post"> <?php echo $reg_email_error; ?><br><br>
+						<input name="reg_name" type="text" placeholder="Teie nimi"> <?php echo $reg_name_error; ?><br><br>						
 						<input name="reg_password" type="password" placeholder="Parool"> <?php echo $reg_password_error;?><br><br>
 						<input name="reg_password_repeat" type="password" placeholder="Korda parooli"> <?php echo $reg_password_repeat_error; ?><br><br>
 						
